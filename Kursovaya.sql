@@ -5,6 +5,20 @@ DROP DATABASE IF EXISTS kinopoisk;
 CREATE DATABASE kinopoisk; 
 USE kinopoisk; 
 
+-- список режисеров 
+DROP TABLE IF EXISTS directors;
+CREATE TABLE directors ( 
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(40),
+	bio TEXT,
+	birthday DATE,
+	gender CHAR(1),
+	
+	INDEX (name)
+	
+	
+);
+
 -- таблица пользователей у 
 DROP TABLE IF EXISTS users; 
 CREATE TABLE users  ( 
@@ -14,9 +28,9 @@ CREATE TABLE users  (
 	`password_hash` VARCHAR(50),
 	favorite_director BIGINT UNSIGNED NOT NULL,
 	telephone_number VARCHAR(12) UNIQUE,
-	regestration_date  DATETIME DEFAULT NOW()
+	regestration_date  DATETIME DEFAULT NOW(),
 	
-	FOREIGN KEY (favorite_director) REFERENCES directors(id),
+	FOREIGN KEY (favorite_director) REFERENCES directors(id)
 	
 );
 -- типы жанров
@@ -48,19 +62,7 @@ CREATE TABLE films (
 	INDEX (director_id),
 	INDEX (film_name)
 );
--- список режисеров 
-DROP TABLE IF EXISTS directors;
-CREATE TABLE directors ( 
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(40),
-	bio TEXT,
-	birthday DATE,
-	gender CHAR(1),
-	
-	INDEX (name)
-	
-	
-);
+
 
 -- промежуточная таблица для директоров что бы сделать связь М : М  
 DROP TABLE IF EXISTS directors_films;
