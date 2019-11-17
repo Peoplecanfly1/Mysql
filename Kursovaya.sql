@@ -1,11 +1,11 @@
--- База курсовой работы на примере Кинопоиск )))) 
+-- Р‘Р°Р·Р° РєСѓСЂСЃРѕРІРѕР№ СЂР°Р±РѕС‚С‹ РЅР° РїСЂРёРјРµСЂРµ РљРёРЅРѕРїРѕРёСЃРє )))) 
 
 
 DROP DATABASE IF EXISTS kinopoisk;
 CREATE DATABASE kinopoisk; 
 USE kinopoisk; 
 
--- таблица пользователей у 
+-- С‚Р°Р±Р»РёС†Р° РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Сѓ 
 DROP TABLE IF EXISTS users; 
 CREATE TABLE users  ( 
 	id SERIAL PRIMARY KEY,
@@ -19,7 +19,7 @@ CREATE TABLE users  (
 	FOREIGN KEY (favorite_director) REFERENCES directors(id),
 	
 );
--- типы жанров
+-- С‚РёРїС‹ Р¶Р°РЅСЂРѕРІ
 DROP TABLE IF EXISTS genres_type;
 CREATE TABLE genres_type (
 	id SERIAL PRIMARY KEY,
@@ -27,11 +27,11 @@ CREATE TABLE genres_type (
 	
 );
 
--- таблица с фильмами  и с базовой информацией о них. 
--- Так как у фильма есть несколько жанров я выделил через отдельные колонки,
---  но лучше вынести в отдельную таблицу и привзяать ключем?   как это оргнизовать лучше ? 
+-- С‚Р°Р±Р»РёС†Р° СЃ С„РёР»СЊРјР°РјРё  Рё СЃ Р±Р°Р·РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРµР№ Рѕ РЅРёС…. 
+-- РўР°Рє РєР°Рє Сѓ С„РёР»СЊРјР° РµСЃС‚СЊ РЅРµСЃРєРѕР»СЊРєРѕ Р¶Р°РЅСЂРѕРІ СЏ РІС‹РґРµР»РёР» С‡РµСЂРµР· РѕС‚РґРµР»СЊРЅС‹Рµ РєРѕР»РѕРЅРєРё,
+--  РЅРѕ Р»СѓС‡С€Рµ РІС‹РЅРµСЃС‚Рё РІ РѕС‚РґРµР»СЊРЅСѓСЋ С‚Р°Р±Р»РёС†Сѓ Рё РїСЂРёРІР·СЏР°С‚СЊ РєР»СЋС‡РµРј?   РєР°Рє СЌС‚Рѕ РѕСЂРіРЅРёР·РѕРІР°С‚СЊ Р»СѓС‡С€Рµ ? 
 
--- Основная таблица с фильмами
+-- РћСЃРЅРѕРІРЅР°СЏ С‚Р°Р±Р»РёС†Р° СЃ С„РёР»СЊРјР°РјРё
 DROP TABLE IF EXISTS films;
 CREATE TABLE films ( 
 	id SERIAL PRIMARY KEY,
@@ -48,7 +48,7 @@ CREATE TABLE films (
 	INDEX (director_id),
 	INDEX (film_name)
 );
--- список режисеров 
+-- СЃРїРёСЃРѕРє СЂРµР¶РёСЃРµСЂРѕРІ 
 DROP TABLE IF EXISTS directors;
 CREATE TABLE directors ( 
 	id SERIAL PRIMARY KEY,
@@ -62,7 +62,7 @@ CREATE TABLE directors (
 	
 );
 
--- промежуточная таблица для директоров что бы сделать связь М : М  
+-- РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅР°СЏ С‚Р°Р±Р»РёС†Р° РґР»СЏ РґРёСЂРµРєС‚РѕСЂРѕРІ С‡С‚Рѕ Р±С‹ СЃРґРµР»Р°С‚СЊ СЃРІСЏР·СЊ Рњ : Рњ  
 DROP TABLE IF EXISTS directors_films;
 CREATE TABLE directors_films ( 
 		id_director BIGINT UNSIGNED NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE directors_films (
 		FOREIGN KEY (id_film) REFERENCES films(id)
 );
 
--- список фильмов добавленных пользователями в избранное
+-- СЃРїРёСЃРѕРє С„РёР»СЊРјРѕРІ РґРѕР±Р°РІР»РµРЅРЅС‹С… РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё РІ РёР·Р±СЂР°РЅРЅРѕРµ
 DROP TABLE IF EXISTS favorites;
 CREATE TABLE favorites ( 
 		user_id BIGINT UNSIGNED  NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE favorites (
 		FOREIGN KEY (film_id) REFERENCES films(id)
 		
 );
--- Обзоры на фильмы сделанные пользователями, так же делал через объеденненый первичный ключ.
+-- РћР±Р·РѕСЂС‹ РЅР° С„РёР»СЊРјС‹ СЃРґРµР»Р°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏРјРё, С‚Р°Рє Р¶Рµ РґРµР»Р°Р» С‡РµСЂРµР· РѕР±СЉРµРґРµРЅРЅРµРЅС‹Р№ РїРµСЂРІРёС‡РЅС‹Р№ РєР»СЋС‡.
 
 DROP TABLE IF EXISTS revisions; 
 CREATE TABLE revisions  ( 	   
@@ -105,8 +105,8 @@ CREATE TABLE revisions  (
 			   
 );
 
--- Оценки пользоватлей фильмам, так же делал через объеденненый первичный ключ.
--- Все пользователи могут оцениват все фильмы.
+-- РћС†РµРЅРєРё РїРѕР»СЊР·РѕРІР°С‚Р»РµР№ С„РёР»СЊРјР°Рј, С‚Р°Рє Р¶Рµ РґРµР»Р°Р» С‡РµСЂРµР· РѕР±СЉРµРґРµРЅРЅРµРЅС‹Р№ РїРµСЂРІРёС‡РЅС‹Р№ РєР»СЋС‡.
+-- Р’СЃРµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё РјРѕРіСѓС‚ РѕС†РµРЅРёРІР°С‚ РІСЃРµ С„РёР»СЊРјС‹.
 DROP TABLE IF EXISTS scores;
 CREATE TABLE scores (
 	user_score BIGINT UNSIGNED NOT NULL,
@@ -121,14 +121,14 @@ CREATE TABLE scores (
 	INDEX(film_related)
 );
 
--- Новостная лента, где авторами являются пользователи
--- Например если у новости есть 2 автора, как сделать так что бы была еще ссылка на юзера, 
--- только она могла бы быть нулевой если автор только 1 ?  Я сделал пример внизу. 
+-- РќРѕРІРѕСЃС‚РЅР°СЏ Р»РµРЅС‚Р°, РіРґРµ Р°РІС‚РѕСЂР°РјРё СЏРІР»СЏСЋС‚СЃСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё
+-- РќР°РїСЂРёРјРµСЂ РµСЃР»Рё Сѓ РЅРѕРІРѕСЃС‚Рё РµСЃС‚СЊ 2 Р°РІС‚РѕСЂР°, РєР°Рє СЃРґРµР»Р°С‚СЊ С‚Р°Рє С‡С‚Рѕ Р±С‹ Р±С‹Р»Р° РµС‰Рµ СЃСЃС‹Р»РєР° РЅР° СЋР·РµСЂР°, 
+-- С‚РѕР»СЊРєРѕ РѕРЅР° РјРѕРіР»Р° Р±С‹ Р±С‹С‚СЊ РЅСѓР»РµРІРѕР№ РµСЃР»Рё Р°РІС‚РѕСЂ С‚РѕР»СЊРєРѕ 1 ?  РЇ СЃРґРµР»Р°Р» РїСЂРёРјРµСЂ РІРЅРёР·Сѓ. 
 DROP TABLE IF EXISTS posts;
 CREATE TABLE posts( 
 		id SERIAL PRIMARY KEY,
 		author_id BIGINT UNSIGNED NOT NULL,
-		sub_author BIGINT UNSIGNED DEFAULT NULL, -- так корректно ? 
+		sub_author BIGINT UNSIGNED DEFAULT NULL, -- С‚Р°Рє РєРѕСЂСЂРµРєС‚РЅРѕ ? 
 		publish_date DATETIME DEFAULT NOW(),
 		body TEXT,
 		post_status ENUM ('front page', 'rejected', 'on moderation'),
@@ -142,7 +142,7 @@ CREATE TABLE posts(
 
 );
 
--- функция комментов к новостным постам. 
+-- С„СѓРЅРєС†РёСЏ РєРѕРјРјРµРЅС‚РѕРІ Рє РЅРѕРІРѕСЃС‚РЅС‹Рј РїРѕСЃС‚Р°Рј. 
 DROP TABLE IF EXISTS comments;
 CREATE TABLE comments( 
 	author_id BIGINT UNSIGNED NOT NULL,
