@@ -20,9 +20,10 @@ GROUP BY from_user_id, to_user_id;
 
 
 --  Подсчитать общее количество лайков, которые получили пользователи младше 10 лет.
-SELECT user_id
-FROM likes
-WHERE user_id IN (SELECT user_id FROM  profiles WHERE birthday > (CURRENT_DATE - INTERVAL 10 YEAR));
+SELECT COUNT(id)
+FROM LIKES WHERE  MEDIA_ID IN 
+	(SELECT id FROM MEDIA WHERE USER_ID IN 
+		(SELECT USER_ID from PROFILES WHERE BIRTHDAY > CURRENT_DATE - INTERVAL 10 YEAR));
 
 
 -- Определить кто больше поставил лайков (всего) - мужчины или женщины?
